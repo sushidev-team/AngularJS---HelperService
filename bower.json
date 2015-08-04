@@ -1,0 +1,26 @@
+{
+  "name": "ambersive-rest",
+  "version": "0.0.1",
+  "authors": [
+    "Manuel Ihl <manuel.ihl@ambersive.com>"
+  ],
+  "description": "Helper functions for AngularJS. Like String generators and a wrapper for template useage.",
+  "main": "build/helper.js",
+  "keywords": [
+    "AngularJS",
+    "Angular",
+    "Helper",
+    "Template",
+    "Generator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:AMBERSIVE/AngularJS---HelperService.git"
+  },
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.ambersive.com"
+}

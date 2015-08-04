@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS - AMBERSIVE RESTful Service</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="../build/helper.min.js"></script>
+    <script>
+
+
+        angular.module('app', ['ambersive.helper']).run(function($templateCache) {
+            $templateCache.put('views/demoView.html', '<p>DemoView from Cache</p>');
+        }).controller('DemoController',function($scope,$log,HelperSrv){
+
+            $scope.generator = {};
+            $scope.generator.string = HelperSrv.generator.string(10);
+            $scope.generator.number = HelperSrv.generator.number(10);
+            $scope.generator.alphanumeric = HelperSrv.generator.alphanumeric(10);
+            HelperSrv.config.templates.useCache = false;
+
+            $scope.templateUrl = HelperSrv.template.url({
+                'application':'common',
+                'module':'moduleName',
+                'folder':'folderName',
+                'template':'templateName.default'
+            });
+
+            // Not cached template
+
+            HelperSrv.template.get({
+                'folder':'views',
+                'template':'demoView'
+            },function(result){
+                $scope.template = result;
+            });
+
+            // Cached Template
+
+            HelperSrv.config.templates.useCache = true;
+
+            $scope.templateCached = HelperSrv.template.get({
+                'folder':'views',
+                'template':'demoView'
+            });
+
+            HelperSrv.template.get({
+                'folder':'views',
+                'template':'demoView'
+            },function(result){
+                $scope.templateCached = result;
+            });
+
+        });
+
+    </script>
+
+</head>
+<body ng-app="app">
+    <div ng-controller="DemoController">
+        <h1>Demo</h1>
+        <h2>Generator</h2>
+        <ul>
+            <li>String:  {{generator.string}}</li>
+            <li>Number:  {{generator.number}}</li>
+            <li>Alphanumeric:  {{generator.alphanumeric}}</li>
+        </ul>
+
+        <h2>Templates</h2>
+        URL: {{templateUrl}}<br/>
+        TEMPLATE =  {{template}}<br/>
+        TEMPLATE CACHED = {{templateCached}}
+    </div>
+</body>
+</html>
