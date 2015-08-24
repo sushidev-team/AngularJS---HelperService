@@ -21,6 +21,9 @@
     "node_modules",
     "bower_components"
   ],
+  "dependencies": {
+    "angular":"*"
+  }
   "license": "MIT",
   "homepage": "http://www.ambersive.com"
 }
