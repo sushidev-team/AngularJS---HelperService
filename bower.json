@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "angular":"*"
-  }
+  },
   "license": "MIT",
   "homepage": "http://www.ambersive.com"
 }
