@@ -1,5 +1,5 @@
 /**
- * RESTful Service for AngularJS
+ * Helper Service for AngularJS
  * @version v0.0.1
  * @link http://www.ambersive.com
  * @licence MIT License, http://www.opensource.org/licenses/MIT
