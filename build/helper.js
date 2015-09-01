@@ -158,4 +158,13 @@
             return HelperSrv;
 
     }]);
+
+    angular.module('ambersive.helper').provider('$helper',[function(){
+        return {
+            $get:function(HelperSrv){
+                return HelperSrv;
+            }
+        };
+    }]);
+
 })(window, document, undefined);
