@@ -125,18 +125,22 @@
 
             HelperSrv.cookies = {
                 'get': function (cname, callback) {
-                    var name = cname + '=',
-                        response = '',
-                        ca = document.cookie.split(';');
-
-                    for (var i = 0; i < ca.length; i++) {
-                        var c = ca[i];
-                        while (c.charAt(0) == ' ') c = c.substring(1);
-                        if (c.indexOf(name) === 0) {
-                            response = c.substring(name.length, c.length);
+                    try {
+                        var name = cname + '=',
+                            response = '',
+                            ca = document.cookie.split(';');
+                        for (var i = 0; i < ca.length; i++) {
+                            var c = ca[i];
+                            while (c.charAt(0) == ' ') c = c.substring(1);
+                            if (c.indexOf(name) === 0) {
+                                response = c.substring(name.length, c.length);
+                            }
                         }
+                        return HelperSrv.response(response, callback);
+                    } catch(err){
+                        $log.error(err);
                     }
-                    return HelperSrv.response(response, callback);
+
                 },
                 'update': function (cname, cvalue, exdays, callback) {
                     var expires = '';
@@ -148,7 +152,7 @@
                         expires = 'expires=' + d.toUTCString();
                     }
                     document.cookie = cname + '=' + cvalue + '; ' + expires+';path=/';
-                    return HelperSrv.response(Helper.cookies.get(cname), callback);
+                    return HelperSrv.response(HelperSrv.cookies.get(cname), callback);
                 },
                 'delete': function (cname) {
                     HelperSrv.cookies.update(cname, '', -100);

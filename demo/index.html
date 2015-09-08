@@ -50,6 +50,13 @@
                 $scope.templateCached = result;
             });
 
+            // Cookies
+
+            HelperSrv.cookies.update('accessToken','tokenvalue',1);
+            HelperSrv.cookies.get('accessToken',function(result){
+                alert(result);
+            });
+
         });
 
     </script>
