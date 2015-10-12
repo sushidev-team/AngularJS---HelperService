@@ -56,18 +56,9 @@
                         templateUrl = obj;
                     }
 
-                    if(useCache === true){
-                        template = $templateCache.get(templateUrl);
-                        return HelperSrv.response(template, callback);
-                    } else {
-                        if(callback === undefined){
-                            $log.error('The function: HelperSrv.template.get() with no use of cache method needs to be called with a callback function. e.g. HelperSrv.template.get(obj,function(html){ });');
-                        }
-                        $http({method: 'GET', url: templateUrl, cache: true}).then(function(result) {
-                            template = result.data;
-                            return HelperSrv.response(template, callback);
-                        });
-                    }
+                    HelperSrv.template.forUrl(templateUrl,useCache,function(template){
+                        return HelperSrv.response(template,callback);
+                    });
                 },
                 'url':function(obj,callback){
                     var templateUrl = null,
@@ -95,6 +86,30 @@
 
                     }
                     return HelperSrv.response(templateUrl, callback);
+                },
+                'forUrl':function(templateUrl,useCache,callback){
+                    var template;
+                    if(templateUrl === undefined){
+                        $log.error('HelperSrv.template.forUrl needs a url');
+                    }
+
+                    if(useCache === undefined || useCache === null){
+                        useCache = HelperSrv.config.templates.useCache;
+                    }
+
+                    if(useCache === true){
+                        template = $templateCache.get(templateUrl);
+                        return HelperSrv.response(template, callback);
+                    } else {
+                        if(callback === undefined){
+                            $log.error('The function: HelperSrv.template.get() with no use of cache method needs to be called with a callback function. e.g. HelperSrv.template.get(obj,function(html){ });');
+                        }
+                        $http({method: 'GET', url: templateUrl, cache: true}).then(function(result) {
+                            template = result.data;
+                            return HelperSrv.response(template, callback);
+                        });
+                    }
+
                 }
             };
 
@@ -129,6 +144,7 @@
                         var name = cname + '=',
                             response = '',
                             ca = document.cookie.split(';');
+
                         for (var i = 0; i < ca.length; i++) {
                             var c = ca[i];
                             while (c.charAt(0) == ' ') c = c.substring(1);

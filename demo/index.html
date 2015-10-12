@@ -52,9 +52,10 @@
 
             // Cookies
 
-            //HelperSrv.cookies.update('accessToken','tokenvalue',1);
-            HelperSrv.cookies.get('accessTokens',function(result){
-                alert(result);
+            HelperSrv.cookies.update('accessToken','tokenvalue',1,function(){
+                HelperSrv.cookies.get('accessToken',function(result){
+                    $log.log('Cookie:'+result);
+                });
             });
 
         });
