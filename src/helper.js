@@ -175,6 +175,14 @@
                 }
             };
 
+            HelperSrv.string = {
+              'startsWith': function(string,prefix,callback){
+                  var result = string.slice(0, prefix.length) == prefix;
+                  return HelperSrv.response(result,callback);
+
+              }
+            };
+
             return HelperSrv;
 
     }]);

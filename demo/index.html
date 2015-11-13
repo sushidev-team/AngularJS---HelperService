@@ -58,6 +58,9 @@
                 });
             });
 
+            $scope.helloWorldStarts = HelperSrv.string.startsWith('Hello world','Hello');
+            $scope.helloWorldStarts2 = HelperSrv.string.startsWith('Hello world','World');
+
         });
 
     </script>
@@ -77,6 +80,11 @@
         URL: {{templateUrl}}<br/>
         TEMPLATE =  {{template}}<br/>
         TEMPLATE CACHED = {{templateCached}}
+
+        <h2>String functions</h2>
+        "Hello world" starts width "Hello" = {{helloWorldStarts}}<br/>
+        "Hello world" starts width "World" = {{helloWorldStarts2}}
+
     </div>
 </body>
 </html>
